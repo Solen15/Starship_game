@@ -2,6 +2,7 @@ import sys
 
 import pygame
 
+from settings import Settings
 
 class Starship:
     """Main class of the game"""
@@ -11,12 +12,10 @@ class Starship:
         pygame.init()
 
         self.clock = pygame.time.Clock()
+        self.settings = Settings()
 
-        self.screen = pygame.display.set_mode((1200, 800))
+        self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Starship")
-
-        # Background color
-        self.bg_color = (150, 150, 150)
 
     def run_game(self):
         """Launch main loop for the game"""
@@ -27,7 +26,7 @@ class Starship:
                     sys.exit()
 
             # redraw the screen after each pass through the loop
-            self.screen.fill(self.bg_color)
+            self.screen.fill(self.settings.bg_color)
 
             # make updated screen visible
             pygame.display.flip()
