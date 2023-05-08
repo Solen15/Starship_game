@@ -5,6 +5,7 @@ import pygame
 from settings import Settings
 from ship import Ship
 
+
 class Starship:
     """Main class of the game"""
 
@@ -26,10 +27,7 @@ class Starship:
     def run_game(self):
         """Launch main loop for the game"""
         while True:
-            # wait for events
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
+            self._check_events()
 
             # redraw the screen after each pass through the loop
             self.screen.fill(self.settings.bg_color)
@@ -38,6 +36,12 @@ class Starship:
             # make updated screen visible
             pygame.display.flip()
             self.clock.tick(60)
+
+    def _check_events(self):
+        """ Check keyboard events"""
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
 
 
 if __name__ == '__main__':
