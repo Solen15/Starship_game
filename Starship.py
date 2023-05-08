@@ -71,7 +71,7 @@ class Starship:
         pygame.display.flip()
 
     def _set_fullscreen(self):
-
+        previous_width = self.screen.get_rect().width
         if self.fullscreen_mode:
             self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
             self.ship.screen_rect = self.screen.get_rect()
@@ -81,6 +81,7 @@ class Starship:
             self.ship.screen_rect = self.screen.get_rect()
             self.fullscreen_mode = True
         screen_rect = self.screen.get_rect()
+        self.ship.adjust_x_after_winresize(previous_width = previous_width, new_width = self.screen.get_width())
         self.ship.rect.bottom = screen_rect.bottom
 
 
