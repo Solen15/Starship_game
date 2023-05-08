@@ -28,13 +28,7 @@ class Starship:
         """Launch main loop for the game"""
         while True:
             self._check_events()
-
-            # redraw the screen after each pass through the loop
-            self.screen.fill(self.settings.bg_color)
-            self.ship.draw()
-
-            # make updated screen visible
-            pygame.display.flip()
+            self._update_screen()
             self.clock.tick(60)
 
     def _check_events(self):
@@ -43,6 +37,15 @@ class Starship:
             if event.type == pygame.QUIT:
                 sys.exit()
 
+    def _update_screen(self):
+        """ Update image on the screen """
+
+        # redraw the screen after each pass through the loop
+        self.screen.fill(self.settings.bg_color)
+        self.ship.draw()
+
+        # make updated screen visible
+        pygame.display.flip()
 
 if __name__ == '__main__':
     Starship().run_game()
