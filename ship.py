@@ -12,6 +12,7 @@ class Ship:
         """Ship initialization"""
         self.screen = starship_game.screen
         self.screen_rect = starship_game.screen.get_rect()
+        self.settings = starship_game.settings
 
         # Load the ship image
         self.image = pygame.image.load('images/Starship.bmp')
@@ -19,6 +20,9 @@ class Ship:
 
         # Start each new ship at the bottom center of the screen.
         self.rect.midbottom = self.screen_rect.midbottom
+
+        # store a float for the ship's position
+        self.x = float(self.rect.x)
 
         # Movement flags
         self.moving_right = False
@@ -32,6 +36,8 @@ class Ship:
     def update(self):
         """ Checking movement flags and update ship's position"""
         if self.moving_right:
-            self.rect.x += 1
+            self.x += self.settings.ship_speed
         elif self.moving_left:
-            self.rect.x -= 1
+            self.x -= self.settings.ship_speed
+
+        self.rect.x = self.x
