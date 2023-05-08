@@ -17,6 +17,7 @@ class Starship:
         self.settings = Settings()
 
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
+        self.fullscreen_mode = False
         pygame.display.set_caption("Starship")
 
         # The call to Ship() requires one argument: an instance of Starship.The self argument here refers to
@@ -50,6 +51,8 @@ class Starship:
             self.ship.moving_left = True
         elif event.key == pygame.K_q:
             sys.exit()
+        elif event.key == pygame.K_o:
+            self._set_fullscreen()
     def _check_keyup_events(self, event):
         """ Key released"""
         if event.key == pygame.K_RIGHT:
@@ -66,6 +69,20 @@ class Starship:
 
         # make updated screen visible
         pygame.display.flip()
+
+    def _set_fullscreen(self):
+
+        if self.fullscreen_mode:
+            self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
+            self.ship.screen_rect = self.screen.get_rect()
+            self.fullscreen_mode = False
+        else:
+            self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+            self.ship.screen_rect = self.screen.get_rect()
+            self.fullscreen_mode = True
+        screen_rect = self.screen.get_rect()
+        self.ship.rect.bottom = screen_rect.bottom
+
 
 if __name__ == '__main__':
     Starship().run_game()
