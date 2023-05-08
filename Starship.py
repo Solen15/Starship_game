@@ -18,6 +18,10 @@ class Starship:
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Starship")
 
+        # The __init__() method of Ship takes two parameters: the self reference and a reference to
+        # the current instance of the Starship class. This will give Ship access to all the game
+        # resources defined in Starship. We then assign the screen to an attribute of Ship , so we can
+        # access it easily in all the methods in this class.
         self.ship = Ship(self)
 
     def run_game(self):

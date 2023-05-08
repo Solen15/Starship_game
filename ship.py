@@ -1,9 +1,13 @@
-
 import pygame
+
 
 class Ship:
     """ Ship class"""
 
+    # The __init__() method of Ship takes two parameters: the self reference and a reference to
+    # the current instance of the Starship class. This will give Ship access to all the game
+    # resources defined in Starship. We then assign the screen to an attribute of Ship , so we can
+    # access it easily in all the methods in this class.
     def __init__(self, starship_game):
         """Ship initialization"""
         self.screen = starship_game.screen
