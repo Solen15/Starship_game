@@ -4,6 +4,7 @@ import pygame
 
 from settings import Settings
 from ship import Ship
+from bullet import Bullet
 
 
 class Starship:
@@ -25,11 +26,14 @@ class Starship:
         # such as the screen object. We assign this Ship instance to self.ship.
         self.ship = Ship(self)
 
+        self.bullets = pygame.sprite.Group()
+
     def run_game(self):
         """Launch main loop for the game"""
         while True:
             self._check_events()
             self.ship.update()
+            self.bullets.update()
             self._update_screen()
             self.clock.tick(60)
 
@@ -53,6 +57,9 @@ class Starship:
             sys.exit()
         elif event.key == pygame.K_o:
             self._set_fullscreen()
+        elif event.key == pygame.K_SPACE:
+            self._fire_bullet()
+
     def _check_keyup_events(self, event):
         """ Key released"""
         if event.key == pygame.K_RIGHT:
@@ -65,6 +72,8 @@ class Starship:
 
         # redraw the screen after each pass through the loop
         self.screen.fill(self.settings.bg_color)
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
         self.ship.draw()
 
         # make updated screen visible
@@ -85,6 +94,10 @@ class Starship:
         self.ship.adjust_x_after_winresize(previous_width = previous_width, new_width = self.screen.get_width())
         self.ship.rect.bottom = screen_rect.bottom
 
+    def _fire_bullet(self):
+        """ Create new bullet and add it to the bullet Group """
+        new_bullet = Bullet(self)
+        self.bullets.add(new_bullet)
 
 if __name__ == '__main__':
     Starship().run_game()
