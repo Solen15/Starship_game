@@ -1,0 +1,28 @@
+
+import pygame
+from pygame.sprite import Sprite
+
+class Bullet(Sprite):
+    """ class to control bullets """
+
+    def __init__(self, game):
+        """ create a bullet object """
+        super().__init__()
+        self.screen = game.screen
+        self.settings = game.settings
+        self.color = self.settings.bullet_color
+
+        self.rect = pygame.Rect(0, 0, self.settings.bullet_width, self.settings.screen_height)
+        self.rect.midtop = game.ship.rect.midtop
+
+        self.y = float(self.rect.y)
+
+    def update(self):
+        """ move the bullet """
+        self.y -= self.settings.bullet_speed
+        self.rect.y = self.y
+
+    def draw_bullet(self):
+        """ draw the bullet """
+
+        pygame.draw.rect(self.screen, self.color, self.rect)

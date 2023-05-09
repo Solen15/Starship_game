@@ -14,6 +14,12 @@ class  Settings:
 
         self.ship_speed = 3#1.5
 
+        # Bullet settings
+        self.bullet_speed = 2.0
+        self.bullet_width = 3
+        self.bullet_height = 15
+        self.bullet_color = (60, 60, 60)
+
     def set_window_limits(self):
         """ set limits of ship movement"""
         self.screen_limit_width = self.screen_width
