@@ -15,5 +15,6 @@ class  Settings:
         self.ship_speed = 3#1.5
 
     def set_window_limits(self):
+        """ set limits of ship movement"""
         self.screen_limit_width = self.screen_width
         self.screen_limit_height = self.screen_height

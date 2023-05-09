@@ -71,6 +71,7 @@ class Starship:
         pygame.display.flip()
 
     def _set_fullscreen(self):
+        """ change between window and screen mode"""
         previous_width = self.screen.get_rect().width
         if self.fullscreen_mode:
             self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))

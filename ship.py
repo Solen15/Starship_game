@@ -43,6 +43,5 @@ class Ship:
         self.rect.x = self.x
 
     def adjust_x_after_winresize(self, previous_width, new_width):
-        #ship_half_width = self.screen_rect.width / 2
-        #self.x = (self.x + ship_half_width) * new_width / previous_width - ship_half_width
+        """Change ship position after changing window/fullscreen mode"""
         self.x = self.x * new_width/previous_width
