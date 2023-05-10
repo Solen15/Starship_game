@@ -33,13 +33,7 @@ class Starship:
         while True:
             self._check_events()
             self.ship.update()
-            self.bullets.update()
-
-            # remove disappeared bullets
-            for bullet in self.bullets.copy():
-                if bullet.rect.bottom <= 0:
-                    self.bullets.remove(bullet)
-
+            self._update_bullets()
             self._update_screen()
             self.clock.tick(60)
 
@@ -105,6 +99,16 @@ class Starship:
         if len(self.bullets) < self.settings.bullets_number:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
+
+    def _update_bullets(self):
+        """ control number of bullets and update its position"""
+        self.bullets.update()
+
+        # remove disappeared bullets
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
+
 
 if __name__ == '__main__':
     Starship().run_game()
