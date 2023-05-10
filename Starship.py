@@ -102,8 +102,9 @@ class Starship:
 
     def _fire_bullet(self):
         """ Create new bullet and add it to the bullet Group """
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)
+        if len(self.bullets) < self.settings.bullets_number:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
 
 if __name__ == '__main__':
     Starship().run_game()
