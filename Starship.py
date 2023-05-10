@@ -5,6 +5,7 @@ import pygame
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
+from enemy import Enemy
 
 
 class Starship:
@@ -27,6 +28,9 @@ class Starship:
         self.ship = Ship(self)
 
         self.bullets = pygame.sprite.Group()
+        self.enemies = pygame.sprite.Group()
+
+        self._create_fleet()
 
     def run_game(self):
         """Launch main loop for the game"""
@@ -75,6 +79,7 @@ class Starship:
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.ship.draw()
+        self.enemies.draw(self.screen)
 
         # make updated screen visible
         pygame.display.flip()
@@ -109,6 +114,10 @@ class Starship:
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
 
+    def _create_fleet(self):
+        """ create fleet of enemies """
+        enemy = Enemy(self)
+        self.enemies.add(enemy)
 
 if __name__ == '__main__':
     Starship().run_game()
