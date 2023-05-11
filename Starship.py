@@ -118,15 +118,17 @@ class Starship:
         """ create fleet of enemies """
         enemy = Enemy(self)
         enemy_width = enemy.rect.width
-        #self.enemies.add(enemy)
 
         current_x = enemy_width
         while current_x < (self.settings.screen_width - 2 * enemy_width):
-            new_enemy = Enemy(self)
-            new_enemy.x = current_x
-            new_enemy.rect.x = current_x
-            self.enemies.add(new_enemy)
+            self._create_enemy(current_x)
             current_x += 2 * enemy_width
+
+    def _create_enemy(self, current_x):
+        new_enemy = Enemy(self)
+        new_enemy.x = current_x
+        new_enemy.rect.x = current_x
+        self.enemies.add(new_enemy)
 
 if __name__ == '__main__':
     Starship().run_game()
