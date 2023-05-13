@@ -38,6 +38,7 @@ class Starship:
             self._check_events()
             self.ship.update()
             self._update_bullets()
+            self._update_enemies()
             self._update_screen()
             self.clock.tick(60)
 
@@ -134,6 +135,10 @@ class Starship:
         new_enemy.rect.x = current_x
         new_enemy.rect.y = current_y
         self.enemies.add(new_enemy)
+
+    def _update_enemies(self):
+        """ update fleet's position"""
+        self.enemies.update()
 
 if __name__ == '__main__':
     Starship().run_game()

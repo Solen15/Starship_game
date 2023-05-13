@@ -7,6 +7,7 @@ class Enemy(Sprite):
         """ initialize enemy """
         super().__init__()
         self.screen = game.screen
+        self.settings = game.settings
 
         self.image = pygame.image.load('images/enemy_ship.bmp')
         self.rect = self. image.get_rect()
@@ -15,3 +16,8 @@ class Enemy(Sprite):
         self.rect.y = self.rect.height
 
         self.x = float(self.rect.x)
+
+    def update(self):
+        """ move enemies"""
+        self.x += self.settings.enemy_speed
+        self.rect.x = self.x
