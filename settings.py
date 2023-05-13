@@ -20,7 +20,12 @@ class  Settings:
         self.bullet_height = 15
         self.bullet_color = (60, 60, 60)
         self.bullets_number = 10
+
+        # enemies settings
         self.enemy_speed = 1.0
+        self.fleet_drop_speed = 10
+        # direction 1 - moving right, -1 - moving left
+        self.fleet_direction = 1
 
     def set_window_limits(self):
         """ set limits of ship movement"""
