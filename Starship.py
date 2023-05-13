@@ -138,7 +138,21 @@ class Starship:
 
     def _update_enemies(self):
         """ update fleet's position"""
+        self._check_fleet_edged()
         self.enemies.update()
+
+    def _check_fleet_edged(self):
+        """ check position fleet's position and change direction"""
+        for enemy in self.enemies.sprites():
+            if enemy.check_edges():
+                self._change_fleet_direction()
+                break
+
+    def _change_fleet_direction(self):
+        for enemy in self.enemies.sprites():
+            enemy.rect.y += self.settings.fleet_drop_speed
+        self.settings.fleet_direction *= -1
+
 
 if __name__ == '__main__':
     Starship().run_game()

@@ -19,5 +19,10 @@ class Enemy(Sprite):
 
     def update(self):
         """ move enemies"""
-        self.x += self.settings.enemy_speed
+        self.x += self.settings.enemy_speed * self.settings.fleet_direction
         self.rect.x = self.x
+
+    def check_edges(self):
+        """ returns True if enemy is at the edge"""
+        screen_rect = self.screen.get_rect()
+        return(self.rect.right >=screen_rect.right) or (self.rect.left <= 0)
