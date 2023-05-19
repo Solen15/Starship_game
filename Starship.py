@@ -87,7 +87,6 @@ class Starship:
 
     def _set_fullscreen(self):
         """ change between window and screen mode"""
-        previous_width = self.screen.get_rect().width
         if self.fullscreen_mode:
             self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
             self.fullscreen_mode = False
@@ -121,17 +120,19 @@ class Starship:
         self.bullets.empty()
         self.enemies.empty()
         self._create_fleet()
+        self.ship.update_screen_size(self)
         if update_ship_position:
-            screen_rect = self.screen.get_rect()
-            self.ship.rect.midbottom = screen_rect.midbottom
+            self.ship.update_position()
+
     def _create_fleet(self):
         """ create fleet of enemies """
         enemy = Enemy(self)
         enemy_width, enemy_height = enemy.rect.size
+        screen_width, screen_height = self.screen.get_rect().width, self.screen.get_rect().height
 
         current_x, current_y = enemy_width, enemy_height
-        while current_y < (self.settings.screen_height - 3 * enemy_height):
-            while current_x < (self.settings.screen_width - 2 * enemy_width):
+        while current_y < (screen_height - 3 * enemy_height):
+            while current_x < (screen_width - 2 * enemy_width):
                 self._create_enemy(current_x, current_y)
                 current_x += 2 * enemy_width
 

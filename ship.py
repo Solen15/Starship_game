@@ -44,4 +44,11 @@ class Ship:
 
     def adjust_x_after_winresize(self, previous_width, new_width):
         """Change ship position after changing window/fullscreen mode"""
-        self.x = self.x * new_width/previous_width
+        self.x = self.x * new_width / previous_width
+
+    def update_screen_size(self, starship_game):
+        self.screen_rect = starship_game.screen.get_rect()
+
+    def update_position(self):
+        self.rect.midbottom = self.screen_rect.midbottom
+        self.x = float(self.rect.x)
