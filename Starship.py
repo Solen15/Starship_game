@@ -90,15 +90,11 @@ class Starship:
         previous_width = self.screen.get_rect().width
         if self.fullscreen_mode:
             self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
-            self.ship.screen_rect = self.screen.get_rect()
             self.fullscreen_mode = False
         else:
             self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-            self.ship.screen_rect = self.screen.get_rect()
             self.fullscreen_mode = True
-        screen_rect = self.screen.get_rect()
-        self.ship.adjust_x_after_winresize(previous_width = previous_width, new_width = self.screen.get_width())
-        self.ship.rect.bottom = screen_rect.bottom
+        self._restart_game(True)
 
     def _fire_bullet(self):
         """ Create new bullet and add it to the bullet Group """
@@ -119,9 +115,15 @@ class Starship:
         collisions = pygame.sprite.groupcollide(self.bullets, self.enemies, True, True)
 
         if not self.enemies:
-            self.bullets.empty()
-            self._create_fleet()
+            self._restart_game(False)
 
+    def _restart_game(self, update_ship_position):
+        self.bullets.empty()
+        self.enemies.empty()
+        self._create_fleet()
+        if update_ship_position:
+            screen_rect = self.screen.get_rect()
+            self.ship.rect.midbottom = screen_rect.midbottom
     def _create_fleet(self):
         """ create fleet of enemies """
         enemy = Enemy(self)
