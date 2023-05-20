@@ -154,6 +154,10 @@ class Starship:
         self._check_fleet_edged()
         self.enemies.update()
 
+        # look for enemy-ship collisions
+        if pygame.sprite.spritecollideany(self.ship, self.enemies):
+            print("Ship hit!")
+
     def _check_fleet_edged(self):
         """ check position fleet's position and change direction"""
         for enemy in self.enemies.sprites():
