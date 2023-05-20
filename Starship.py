@@ -110,6 +110,9 @@ class Starship:
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
 
+        self._check_bullet_enemy_collisions()
+
+    def _check_bullet_enemy_collisions(self):
         """ check if bullets hit enemies """
         collisions = pygame.sprite.groupcollide(self.bullets, self.enemies, True, True)
 
