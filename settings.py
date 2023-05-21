@@ -13,6 +13,7 @@ class  Settings:
         self.screen_limit_height = 800
 
         self.ship_speed = 3#1.5
+        self.ship_limit = 3
 
         # Bullet settings
         self.bullet_speed = 2.0

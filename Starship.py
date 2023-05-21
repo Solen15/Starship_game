@@ -1,8 +1,10 @@
 import sys
+from time import sleep
 
 import pygame
 
 from settings import Settings
+from game_stats import GameStats
 from ship import Ship
 from bullet import Bullet
 from enemy import Enemy
@@ -21,6 +23,8 @@ class Starship:
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         self.fullscreen_mode = False
         pygame.display.set_caption("Starship")
+
+        self.stats = GameStats(self)
 
         # The call to Ship() requires one argument: an instance of Starship.The self argument here refers to
         # the current instance of Starship.This is the parameter that gives Ship access to the game’s resources,
@@ -156,7 +160,7 @@ class Starship:
 
         # look for enemy-ship collisions
         if pygame.sprite.spritecollideany(self.ship, self.enemies):
-            print("Ship hit!")
+            self._ship_hit()
 
     def _check_fleet_edged(self):
         """ check position fleet's position and change direction"""
@@ -169,6 +173,14 @@ class Starship:
         for enemy in self.enemies.sprites():
             enemy.rect.y += self.settings.fleet_drop_speed
         self.settings.fleet_direction *= -1
+
+    def _ship_hit(self):
+        """ ship being hit by the enemy """
+        self.stats.ships_left -= 1
+
+        self._restart_game(True)
+
+        sleep(0.5)
 
 
 if __name__ == '__main__':
