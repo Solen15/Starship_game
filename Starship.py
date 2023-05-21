@@ -162,6 +162,8 @@ class Starship:
         if pygame.sprite.spritecollideany(self.ship, self.enemies):
             self._ship_hit()
 
+        self._check_enemies_bottom()
+
     def _check_fleet_edged(self):
         """ check position fleet's position and change direction"""
         for enemy in self.enemies.sprites():
@@ -181,6 +183,14 @@ class Starship:
         self._restart_game(True)
 
         sleep(0.5)
+
+    def _check_enemies_bottom(self):
+        """ check if any enemies have reached the bottom"""
+        for enemy in self.enemies.sprites():
+            if enemy.rect.bottom >= self.settings.screen_height:
+                # the same as if ship got hit
+                self._ship_hit()
+                break
 
 
 if __name__ == '__main__':
