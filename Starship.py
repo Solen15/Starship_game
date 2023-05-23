@@ -36,13 +36,18 @@ class Starship:
 
         self._create_fleet()
 
+        self.game_active = True
+
     def run_game(self):
         """Launch main loop for the game"""
         while True:
             self._check_events()
-            self.ship.update()
-            self._update_bullets()
-            self._update_enemies()
+
+            if self.game_active:
+                self.ship.update()
+                self._update_bullets()
+                self._update_enemies()
+
             self._update_screen()
             self.clock.tick(60)
 
@@ -178,11 +183,12 @@ class Starship:
 
     def _ship_hit(self):
         """ ship being hit by the enemy """
-        self.stats.ships_left -= 1
-
-        self._restart_game(True)
-
-        sleep(0.5)
+        if self.stats.ships_left > 0:
+            self.stats.ships_left -= 1
+            self._restart_game(True)
+            sleep(0.5)
+        else:
+            self.game_active = False
 
     def _check_enemies_bottom(self):
         """ check if any enemies have reached the bottom"""
