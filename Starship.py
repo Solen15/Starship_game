@@ -5,6 +5,7 @@ import pygame
 
 from settings import Settings
 from game_stats import GameStats
+from button import Button
 from ship import Ship
 from bullet import Bullet
 from enemy import Enemy
@@ -36,7 +37,9 @@ class Starship:
 
         self._create_fleet()
 
-        self.game_active = True
+        self.game_active = False
+
+        self.play_buttom = Button(self, "Play")
 
     def run_game(self):
         """Launch main loop for the game"""
@@ -60,6 +63,9 @@ class Starship:
                 self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                self._check_play_button(mouse_pos)
 
     def _check_keydown_events(self, event):
         """ Key pressed"""
@@ -91,6 +97,8 @@ class Starship:
         self.ship.draw()
         self.enemies.draw(self.screen)
 
+        if not self.game_active:
+            self.play_buttom.draw_button()
         # make updated screen visible
         pygame.display.flip()
 
@@ -197,6 +205,11 @@ class Starship:
                 # the same as if ship got hit
                 self._ship_hit()
                 break
+
+    def _check_play_button(self, mouse_pos):
+        """ start new game if play_button was pressed """
+        if self.play_buttom.rect.collidepoint(mouse_pos):
+            self.game_active = True
 
 
 if __name__ == '__main__':
