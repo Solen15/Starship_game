@@ -135,6 +135,7 @@ class Starship:
 
         if not self.enemies:
             self._restart_game(False)
+            self.settings.increase_speed()
 
     def _restart_game(self, update_ship_position):
         self.bullets.empty()
