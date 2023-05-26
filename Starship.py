@@ -208,7 +208,8 @@ class Starship:
 
     def _check_play_button(self, mouse_pos):
         """ start new game if play_button was pressed """
-        if self.play_buttom.rect.collidepoint(mouse_pos):
+        button_clicked = self.play_buttom.rect.collidepoint(mouse_pos)
+        if button_clicked and not self.game_active:
             self.stats.reset_stats()
             self.game_active = True
             self._restart_game(True)
