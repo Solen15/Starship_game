@@ -197,6 +197,7 @@ class Starship:
             sleep(0.5)
         else:
             self.game_active = False
+            pygame.mouse.set_visible(True)
 
     def _check_enemies_bottom(self):
         """ check if any enemies have reached the bottom"""
@@ -213,6 +214,8 @@ class Starship:
             self.stats.reset_stats()
             self.game_active = True
             self._restart_game(True)
+
+            pygame.mouse.set_visible(False)
 
 
 
