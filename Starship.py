@@ -138,7 +138,8 @@ class Starship:
         collisions = pygame.sprite.groupcollide(self.bullets, self.enemies, True, True)
 
         if collisions:
-            self.stats.score += self.settings.enemy_points
+            for enemies in collisions.values():
+                self.stats.score += self.settings.enemy_points * len(enemies)
             self.sb.prep_score()
 
         if not self.enemies:
