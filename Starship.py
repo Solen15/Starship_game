@@ -212,6 +212,7 @@ class Starship:
         """ start new game if play_button was pressed """
         button_clicked = self.play_buttom.rect.collidepoint(mouse_pos)
         if button_clicked and not self.game_active:
+            self.settings.initialize_dynamic_settings()
             self.stats.reset_stats()
             self.game_active = True
             self._restart_game(True)
