@@ -141,6 +141,7 @@ class Starship:
             for enemies in collisions.values():
                 self.stats.score += self.settings.enemy_points * len(enemies)
             self.sb.prep_score()
+            self.sb.check_high_score()
 
         if not self.enemies:
             self._restart_game(False)
