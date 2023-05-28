@@ -44,7 +44,7 @@ class Settings:
         self.fleet_direction = 1
 
         #Score settings
-        self.enemy_points = 1
+        self.enemy_points = 50
 
     def increase_speed(self):
         """ Increase speed settings """
