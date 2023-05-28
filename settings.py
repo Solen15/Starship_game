@@ -25,6 +25,8 @@ class Settings:
 
         self.speedup_scale = 1.1
 
+        self.score_scale = 1.5
+
         self.initialize_dynamic_settings()
 
     def set_window_limits(self):
@@ -49,3 +51,5 @@ class Settings:
         self.ship_speed *= self.speedup_scale
         self.bullet_speed *= self.speedup_scale
         self.enemy_speed *= self.speedup_scale
+
+        self.enemy_points = int(self.enemy_points * self.score_scale)
