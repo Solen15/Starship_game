@@ -5,6 +5,7 @@ import pygame
 
 from settings import Settings
 from game_stats import GameStats
+from score import Score
 from button import Button
 from ship import Ship
 from bullet import Bullet
@@ -26,6 +27,7 @@ class Starship:
         pygame.display.set_caption("Starship")
 
         self.stats = GameStats(self)
+        self.sb = Score(self)
 
         # The call to Ship() requires one argument: an instance of Starship.The self argument here refers to
         # the current instance of Starship.This is the parameter that gives Ship access to the game’s resources,
@@ -96,6 +98,8 @@ class Starship:
             bullet.draw_bullet()
         self.ship.draw()
         self.enemies.draw(self.screen)
+
+        self.sb.show_score()
 
         if not self.game_active:
             self.play_buttom.draw_button()
