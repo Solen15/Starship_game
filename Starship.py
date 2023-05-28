@@ -137,6 +137,10 @@ class Starship:
         """ check if bullets hit enemies """
         collisions = pygame.sprite.groupcollide(self.bullets, self.enemies, True, True)
 
+        if collisions:
+            self.stats.score += self.settings.enemy_points
+            self.sb.prep_score()
+
         if not self.enemies:
             self._restart_game(False)
             self.settings.increase_speed()

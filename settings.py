@@ -41,6 +41,9 @@ class Settings:
         # direction 1 - moving right, -1 - moving left
         self.fleet_direction = 1
 
+        #Score settings
+        self.enemy_points = 1
+
     def increase_speed(self):
         """ Increase speed settings """
         self.ship_speed *= self.speedup_scale
