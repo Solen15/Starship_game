@@ -161,7 +161,7 @@ class Starship:
         screen_width, screen_height = self.screen.get_rect().width, self.screen.get_rect().height
 
         current_x, current_y = enemy_width, enemy_height
-        while current_y < (screen_height - 3 * enemy_height):
+        while current_y < (screen_height - 4 * enemy_height):
             while current_x < (screen_width - 2 * enemy_width):
                 self._create_enemy(current_x, current_y)
                 current_x += 2 * enemy_width
