@@ -154,6 +154,7 @@ class Starship:
         self.ship.update_screen_size(self)
         if update_ship_position:
             self.ship.update_position()
+            self.stats.score = 0
 
     def _create_fleet(self):
         """ create fleet of enemies """
