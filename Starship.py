@@ -147,6 +147,9 @@ class Starship:
             self._restart_game(False)
             self.settings.increase_speed()
 
+            self.stats.level += 1
+            self.sb.prep_level()
+
     def _restart_game(self, update_ship_position):
         self.bullets.empty()
         self.enemies.empty()
@@ -226,6 +229,7 @@ class Starship:
             self.settings.initialize_dynamic_settings()
             self.stats.reset_stats()
             self.sb.prep_score()
+            self.sb.prep_level()
             self.game_active = True
             self._restart_game(True)
 
