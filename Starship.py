@@ -39,7 +39,7 @@ class Starship:
 
         self._create_fleet()
 
-        self.game_active = False
+        self.game_active = True
 
         self.play_buttom = Button(self, "Play")
 
@@ -158,6 +158,7 @@ class Starship:
         if update_ship_position:
             self.ship.update_position()
             self.stats.score = 0
+        self.play_buttom.update_screen_size(self)
 
     def _create_fleet(self):
         """ create fleet of enemies """
