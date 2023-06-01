@@ -47,6 +47,7 @@ class Ship:
         self.x = self.x * new_width / previous_width
 
     def update_screen_size(self, starship_game):
+        self.screen = starship_game.screen
         self.screen_rect = starship_game.screen.get_rect()
 
     def update_position(self):

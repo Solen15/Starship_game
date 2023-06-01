@@ -39,7 +39,7 @@ class Starship:
 
         self._create_fleet()
 
-        self.game_active = True
+        self.game_active = False
 
         self.play_buttom = Button(self, "Play")
 
@@ -114,6 +114,8 @@ class Starship:
         else:
             self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
             self.fullscreen_mode = True
+        self.game_active = False
+        pygame.mouse.set_visible(True)
         self._restart_game(True)
 
     def _fire_bullet(self):
@@ -218,7 +220,7 @@ class Starship:
     def _check_enemies_bottom(self):
         """ check if any enemies have reached the bottom"""
         for enemy in self.enemies.sprites():
-            if enemy.rect.bottom >= self.settings.screen_height:
+            if enemy.rect.bottom >= self.screen.get_rect().height:
                 # the same as if ship got hit
                 self._ship_hit()
                 break
