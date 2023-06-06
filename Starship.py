@@ -19,6 +19,11 @@ class Starship:
         """Game initialization"""
         pygame.init()
 
+        self.joysticks = {}
+        for i in range(pygame.joystick.get_count()):
+            self.joysticks[i] = pygame.joystick.Joystick(i)
+            self.joysticks[i].init()
+
         self.clock = pygame.time.Clock()
         self.settings = Settings()
 
@@ -43,6 +48,8 @@ class Starship:
 
         self.play_buttom = Button(self, "Play")
 
+        pygame.event.get()
+
     def run_game(self):
         """Launch main loop for the game"""
         while True:
@@ -59,6 +66,9 @@ class Starship:
     def _check_events(self):
         """ Check keyboard events"""
         for event in pygame.event.get():
+            print(event)
+            print(pygame.joystick.get_count())
+            print(self.joysticks)
             if event.type == pygame.QUIT:
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
@@ -68,6 +78,10 @@ class Starship:
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
                 self._check_play_button(mouse_pos)
+            elif event.type == pygame.JOYAXISMOTION:
+                self._check_joyaxismove_events(event)
+            elif event.type == pygame.JOYBUTTONDOWN:
+                self._check_joykeydown_events(event)
 
     def _check_keydown_events(self, event):
         """ Key pressed"""
@@ -87,6 +101,29 @@ class Starship:
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:
+            self.ship.moving_left = False
+
+    def _check_joykeydown_events(self, event):
+        if event.button == 9 and not self.game_active:
+            self.settings.initialize_dynamic_settings()
+            self.stats.reset_stats()
+            self.sb.prep_score()
+            self.sb.prep_level()
+            self.game_active = True
+            self._restart_game(True)
+
+            pygame.mouse.set_visible(False)
+        elif event.button == 2:
+            self._fire_bullet()
+
+    def _check_joyaxismove_events(self, event):
+
+        if event.axis == 3 and event.value <= -0.5:
+            self.ship.moving_left = True
+        elif event.axis == 3 and event.value >= 0.5:
+            self.ship.moving_right = True
+        elif event.axis == 3 and -0.5 < event.value < 0.5:
+            self.ship.moving_right = False
             self.ship.moving_left = False
 
     def _update_screen(self):
@@ -237,7 +274,6 @@ class Starship:
             self._restart_game(True)
 
             pygame.mouse.set_visible(False)
-
 
 
 if __name__ == '__main__':
